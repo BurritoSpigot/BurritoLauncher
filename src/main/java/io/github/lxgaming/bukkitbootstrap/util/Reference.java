@@ -18,10 +18,10 @@ package io.github.lxgaming.bukkitbootstrap.util;
 
 public class Reference {
     
-    public static final String APP_ID = "bukkitbootstrap";
-    public static final String APP_NAME = "BukkitBootstrap";
-    public static final String APP_VERSION = "1.0.1";
-    public static final String AUTHORS = "LX_Gaming";
-    public static final String SOURCE = "https://github.com/LXGaming/BukkitBootstrap";
-    public static final String WEBSITE = "https://lxgaming.github.io/";
+    public static final String APP_ID = "burritolauncher";
+    public static final String APP_NAME = "BurritoLauncher";
+    public static final String APP_VERSION = "1.0.0";
+    public static final String AUTHORS = "LX_Gaming, BurritoSpigot";
+    public static final String SOURCE = "https://github.com/BurritoSpigot/BurritoLauncher";
+    public static final String WEBSITE = "https://github.com/BurritoSpigot/";
 }

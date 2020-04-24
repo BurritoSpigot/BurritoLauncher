@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    provided(fileTree(dir: "./libs/", include: ["spigot-*.jar"]))
+    provided(fileTree(dir: "./libs/", include: ["*.jar"]))
     provided("com.google.code.gson:gson:2.8.0")
     provided("com.google.guava:guava:21.0")
     provided("commons-io:commons-io:2.5")

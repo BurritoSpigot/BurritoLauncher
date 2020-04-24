@@ -16,6 +16,7 @@
 
 package io.github.lxgaming.bukkitbootstrap;
 
+import io.github.lxgaming.bukkitbootstrap.util.PatchingUtils;
 import io.github.lxgaming.bukkitbootstrap.util.Reference;
 import net.minecraft.launchwrapper.Launch;
 
@@ -29,7 +30,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -41,6 +41,13 @@ public class Main {
         printInformation(action -> {
             System.out.println(action);
         });
+
+        File testforserverJarFile = new File("./cache/patched.jar");
+        
+        if (!testforserverJarFile.exists()) {
+            (new File("./cache")).mkdirs();
+            PatchingUtils.getandpatchjar();
+        }
         
         List<String> arguments = newArrayList(args);
         loadServerJar(arguments);
@@ -51,12 +58,8 @@ public class Main {
     
     private static void loadServerJar(List<String> arguments) {
         try {
-            Optional<String> serverJarPath = getArgument(arguments, "--serverJar");
-            if (!serverJarPath.isPresent()) {
-                throw new IllegalArgumentException("--serverJar argument is not present");
-            }
-            
-            File serverJarFile = new File(serverJarPath.get());
+            String serverJarPath = "./cache/patched.jar";
+            File serverJarFile = new File(serverJarPath);
             if (serverJarFile == null || !serverJarFile.exists()) {
                 throw new IOException("Failed to find server jar");
             }
@@ -71,20 +74,6 @@ public class Main {
             ex.printStackTrace();
             System.exit(1);
         }
-    }
-    
-    private static Optional<String> getArgument(List<String> arguments, String argument) {
-        for (Iterator<String> iterator = arguments.iterator(); iterator.hasNext(); ) {
-            String string = iterator.next();
-            if (string != null && string.equals(argument) && iterator.hasNext()) {
-                iterator.remove();
-                String value = iterator.next();
-                iterator.remove();
-                return Optional.of(value);
-            }
-        }
-        
-        return Optional.empty();
     }
     
     public static void printInformation(Consumer<? super String> consumer) {
